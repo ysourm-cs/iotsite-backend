@@ -56,8 +56,13 @@ public class UserController  {
     public User login(@PathVariable String email) {
         System.out.println("Looking for user with email :" + email);
         User foundUser = userService.findByEmail(email);
-        System.out.println("Found user : " + foundUser.getName());
-        return foundUser;
+        if (foundUser != null) {
+            // System.out.println("Found user : " + foundUser.getName());
+            return foundUser;
+        } else {
+            System.out.println("Could not find user with email : " + email);
+            return null;
+        }
     }
 
 }
