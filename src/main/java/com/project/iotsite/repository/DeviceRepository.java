@@ -11,11 +11,11 @@ import java.util.List;
 public interface DeviceRepository extends JpaRepository<Device, Long> {
 
     List<Device> findAll();
-    List<Device> findByname(String name);
+    List<Device> findByName(String name);
     Device findById(long id);
 
     List<Device> findAllByRoomId(long id);
-    List<Device> findAllByRoomIdAndStatus(long room_id, long status);
+    //List<Device> findAllByRoomIdAndStatus(long room_id, long status);
 
     List<Device> findAllByUsersAndRoomId(User user, long roomId);
 

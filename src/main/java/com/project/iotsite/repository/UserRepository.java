@@ -1,6 +1,7 @@
 package com.project.iotsite.repository;
 
 import com.project.iotsite.entity.Device;
+import com.project.iotsite.entity.Room;
 import com.project.iotsite.entity.Type;
 import com.project.iotsite.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
 
-
+    List<Room> findRoomsById(long userId);
 
 
 }

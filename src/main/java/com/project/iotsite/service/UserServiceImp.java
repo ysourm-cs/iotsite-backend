@@ -1,12 +1,15 @@
 package com.project.iotsite.service;
 
 import com.project.iotsite.entity.Device;
+import com.project.iotsite.entity.Room;
 import com.project.iotsite.entity.User;
 import com.project.iotsite.repository.DeviceRepository;
+import com.project.iotsite.repository.RoomRepository;
 import com.project.iotsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +20,9 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
 //    @Autowired
 //    private BCryptPasswordEncoder encoder;
@@ -67,4 +73,22 @@ public class UserServiceImp implements UserService {
         return deviceRepository.findAllByUsersAndRoomId(user, roomId);
     }
 
+    /// ROOMS
+
+
+    @Override
+    public List<Room> findRoomsById(long userId) {
+
+       List<Room> allRooms =  roomRepository.findAll();
+       List<Room> userRooms = new ArrayList<>(allRooms.size());
+       for (Room anyRoom : allRooms) {
+           List<Device> myRoomDevices = findAllByUserIdAndRoomId(userId, anyRoom.getId());
+           if (myRoomDevices != null && !myRoomDevices.isEmpty()) {
+               if (!userRooms.contains(anyRoom)) {
+                   userRooms.add(anyRoom);
+               }
+           }
+       }
+       return userRooms;
+    }
 }

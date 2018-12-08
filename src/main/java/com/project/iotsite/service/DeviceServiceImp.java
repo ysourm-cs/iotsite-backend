@@ -15,7 +15,7 @@ public class DeviceServiceImp implements DeviceService {
 
     @Override
     public List<Device> findByname(String name) {
-        return deviceRepository.findByname(name);
+        return deviceRepository.findByName(name);
     }
 
     @Override

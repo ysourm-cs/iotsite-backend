@@ -1,7 +1,9 @@
 package com.project.iotsite.controller;
 
 import com.project.iotsite.entity.Device;
+import com.project.iotsite.entity.Room;
 import com.project.iotsite.entity.User;
+import com.project.iotsite.service.RoomService;
 import com.project.iotsite.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.List;
 public class UserController  {
     @Autowired
     private UserService userService;
+
 
     @GetMapping("/users")
     public Collection<User> getAllUsers() {
@@ -57,6 +60,11 @@ public class UserController  {
     @GetMapping("/users/{userId}/room/{id}")
     public List<Device> findAllByUserAndRoomId(@PathVariable long userId, @PathVariable long id) {
         return userService.findAllByUserIdAndRoomId(userId, id);
+    }
+
+    @GetMapping("/users/{userId}/rooms")
+    public List<Room> findAllRoomsByUserId(@PathVariable  long userId) {
+        return userService.findRoomsById(userId);
     }
 
     @GetMapping("/login/{email}")
