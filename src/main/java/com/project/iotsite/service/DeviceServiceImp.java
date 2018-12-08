@@ -1,6 +1,7 @@
 package com.project.iotsite.service;
 
 import com.project.iotsite.entity.Device;
+import com.project.iotsite.entity.User;
 import com.project.iotsite.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,8 +57,8 @@ public class DeviceServiceImp implements DeviceService {
 
     //        probably doesn't work
     @Override
-    public List<Device> changeRoomDevices(long room_id, long oldStatus, long newStatus) {
-        List<Device> deviceList = deviceRepository.findAllByRoomId(room_id);
+    public List<Device> changeRoomDevices(long userId, long room_id, long oldStatus, long newStatus) {
+        List<Device> deviceList = deviceRepository.findAllByUsersIdAndRoomId(userId, room_id);
 
         Device d;
         for (int i=0; i< deviceList.toArray().length; i++){
@@ -74,5 +75,16 @@ public class DeviceServiceImp implements DeviceService {
         d.setStatus( 1);
         deviceRepository.save(d);
         return d;
+    }
+
+
+    @Override
+    public List<Device> findAllByUsersAndRoomId(User user, long roomId) {
+        return deviceRepository.findAllByUsersAndRoomId(user, roomId);
+    }
+
+    @Override
+    public List<Device> findAllByUsersIdAndRoomId(long userId, long roomId) {
+        return deviceRepository.findAllByUsersIdAndRoomId(userId, roomId);
     }
 }

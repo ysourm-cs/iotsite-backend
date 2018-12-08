@@ -1,5 +1,6 @@
 package com.project.iotsite.service;
 
+import com.project.iotsite.entity.Device;
 import com.project.iotsite.entity.User;
 
 import java.util.List;
@@ -20,5 +21,9 @@ public interface UserService {
     void delete(Long id);
 
     void delete(User p);
+
+    public List<Device> findAllByUserIdAndRoomId(long id, long roomId);
+
+    List<Device> findAllByUserIdAndRoomId(User user, long roomId);
 }
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("deviseRepository")
+@Repository
 public interface DeviceRepository extends JpaRepository<Device, Long> {
 
     List<Device> findAll();
@@ -17,5 +17,8 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
     List<Device> findAllByRoomId(long id);
     List<Device> findAllByRoomIdAndStatus(long room_id, long status);
 
+    List<Device> findAllByUsersAndRoomId(User user, long roomId);
 
+
+    List<Device> findAllByUsersIdAndRoomId(long userId, long roomId);
 }

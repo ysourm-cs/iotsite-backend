@@ -1,5 +1,6 @@
 package com.project.iotsite.controller;
 
+import com.project.iotsite.entity.Device;
 import com.project.iotsite.entity.User;
 import com.project.iotsite.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -50,6 +52,11 @@ public class UserController  {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(saved.getId()).toUri();
         return ResponseEntity.created(uri).build();
 
+    }
+
+    @GetMapping("/users/{userId}/room/{id}")
+    public List<Device> findAllByUserAndRoomId(@PathVariable long userId, @PathVariable long id) {
+        return userService.findAllByUserIdAndRoomId(userId, id);
     }
 
     @GetMapping("/login/{email}")

@@ -66,17 +66,19 @@ public class DeviceController  {
         return deviceService.closeDevice(id);
     }
 
-    @PutMapping("/rooms/{id}/open")
-    public List<Device> openAllDevicesOfRoom(@PathVariable long id)
+    @PutMapping("/users/{userId}/rooms/open")
+    public List<Device> openAllDevicesOfRoom(@PathVariable long userId, @RequestBody long roomId)
     {
-        return deviceService.changeRoomDevices(id,0,1);
+        return deviceService.changeRoomDevices(userId, roomId,0,1);
     }
 
-    @PutMapping("/rooms/{id}/close")
-    public List<Device> closeAllDevicesOfRoom(@PathVariable long id)
+    @PutMapping("/users/{userId}/rooms/close")
+    public List<Device> closeAllDevicesOfRoom(@PathVariable long userId, @RequestBody long roomId)
     {
-        return deviceService.changeRoomDevices(id,1,0);
+        return deviceService.changeRoomDevices(userId, roomId,1,0);
     }
+
+
 
 
 

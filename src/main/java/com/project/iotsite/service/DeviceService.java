@@ -1,6 +1,7 @@
 package com.project.iotsite.service;
 
 import com.project.iotsite.entity.Device;
+import com.project.iotsite.entity.User;
 
 import java.util.List;
 
@@ -25,5 +26,9 @@ public interface DeviceService {
 
     Device closeDevice(long id);
 
-    List<Device> changeRoomDevices(long room_id, long oldStatus, long newStatus);
+    List<Device> changeRoomDevices(long userId, long room_id, long oldStatus, long newStatus);
+
+
+    List<Device> findAllByUsersAndRoomId(User user, long roomId);
+    List<Device> findAllByUsersIdAndRoomId(long userId, long roomId);
 }

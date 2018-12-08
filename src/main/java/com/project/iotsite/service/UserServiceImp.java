@@ -1,6 +1,8 @@
 package com.project.iotsite.service;
 
+import com.project.iotsite.entity.Device;
 import com.project.iotsite.entity.User;
+import com.project.iotsite.repository.DeviceRepository;
 import com.project.iotsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
     @Autowired
     private UserRepository usrRep;
+
+    @Autowired
+    private DeviceRepository deviceRepository;
 
 //    @Autowired
 //    private BCryptPasswordEncoder encoder;
@@ -50,6 +55,16 @@ public class UserServiceImp implements UserService {
     @Override
     public void delete(User d) {
         usrRep.delete(d);
+    }
+
+    @Override
+    public List<Device> findAllByUserIdAndRoomId(long id, long roomId) {
+        return deviceRepository.findAllByUsersIdAndRoomId(id, roomId);
+    }
+
+    @Override
+    public List<Device> findAllByUserIdAndRoomId(User user, long roomId){
+        return deviceRepository.findAllByUsersAndRoomId(user, roomId);
     }
 
 }
